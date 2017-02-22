@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+            <div class="panel panel-black panel-primary">
             <div class="panel-heading">TAMBAH LEMBUR PEGAWAI</div>
 				<div class="panel-body">
                 {!! Form::open(['url'=>'lembur_pegawai']) !!}
@@ -38,6 +38,7 @@
 				                                    </span>
 				            @endif
 					</div>
+					<br>
 					<div class="form-group">
                         {!! Form::submit('Save',['class'=>'btn btn-primary form control']) !!}
                         {!! Form::close() !!}

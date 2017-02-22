@@ -5,10 +5,12 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
             <div class="panel-heading">PENGGAJIAN</div>
-				
+                <div class="panel-body">
+                </div>
             </div>
             </div>
-        </div>  
+        </div>
+    
  <div class="panel-body panel-primary">
                     <center><a href="{{route('penggajian.create')}}" class="btn btn-success">Hitung Peggajian</a></center>
                     <center>{{$penggajian->links()}}</center>
@@ -26,8 +28,7 @@
                 <th>Tanggal Pengambilan</th>
                 <th>Status Pengambilan</th>
                 <th>Petugas Penerima</th>
-                <th></th>
-                <th colspan="3"><center>Action</center></th>
+                <th><center>Action</center></th>
             </tr>
         </thead>
         @php
@@ -43,19 +44,9 @@
                 <td>{{$data->gaji_pokok}} </td>
                 <td>{{$data->total_gaji}} </td>
                 <td>{{$data->updated_at}} </td>
-                @if($data->status_pengambilan == 0)
-                
-                    <td>Belum Diambil </td>
-                
-                @endif
-                @if($data->status_pengambilan == 1)
-                
-                    <td>Sudah Diambil</td>
-                
-                @endif
+                 <td>Sudah Diambil</td>
                 <td>{{$data->petugas_penerima}} </td>
-                <td><center><a href="{{route('penggajian.edit', $data->id)}}" class="btn btn-warning">Sudah Diambil</a></center>{!! Form::close() !!}</td>
-
+                
                 <td><center>
                     <form method="POST" action="{{route('penggajian.destroy', $data->id)}}">
                     {{csrf_field()}}

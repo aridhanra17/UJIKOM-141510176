@@ -32,11 +32,12 @@
 		<tbody>
 			<tr>
 				
-				<td>{{$no++}}</td>
+				<td>{{$no++}}</td></font>
 				<td>{{$data->kode_jabatan}}</td>
 				<td>{{$data->nama_jabatan}}</td>
 				<?php $data->besaran_uang=number_format($data->besaran_uang,2,',','.'); ?>
 				<td>Rp.{{$data->besaran_uang}}</td>
+				</font>
 				@if (Auth::user()->permission == "Super Admin")
 				<td><center><a href="{{route('jabatan.edit', $data->id)}}" class="btn btn-warning">Edit</a></center></td>
 				<td><center>

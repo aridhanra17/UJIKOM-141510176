@@ -54,10 +54,13 @@ class tunjangan_pegawai_controller extends Controller
     {
         //
         $tp = array (
-            'pegawai_id'=>'required',
+            'pegawai_id'=>'required|unique:tunjangan_pegawais',
+            'kode_tunjangan_id' => 'required',
             );
         $pesan = array(
+            'pegawai_id.unique' =>'Maaf Tunjangan Pegawai Sudah Ada',
             'pegawai_id.required' =>'Harus Diisi broo',
+            'kode_tunjangan_id.required' =>'Harus Diisi broo',
             );
 
         $validation = Validator::make(Request::all(), $tp, $pesan);
@@ -68,31 +71,25 @@ class tunjangan_pegawai_controller extends Controller
         }
 
         $tunjangan_pegawai = Request::all();
-        // dd($tunjangan_pegawai);
+        //dd($tunjangan_pegawai);
         $pegawai = Pegawai::where('id', $tunjangan_pegawai['pegawai_id'])->first();
         //dd($pegawai);
         $check = Tunjangan::where('jabatan_id', $pegawai->jabatan_id)->where('golongan_id', $pegawai->golongan_id)->first();
+        //dd($check);
         $data_tunpeg = Tunjangan_pegawai::where('pegawai_id', $pegawai->id)->first();
 
-        
-        if(isset($data_tunpeg))
-        { 
             if(!isset ($check->id))
             {
-                $peg = Pegawai::all();
-                $tun = Tunjangan::all();
-                $error = true;
-                return view('tunjangan_pegawai.create', compact('peg','tun','error'));
+                    $peg = Pegawai::all();
+                    $tun = Tunjangan::all();
+                    $error = true;
+                    return view('tunjangan_pegawai.create', compact('peg','tun','error'));
+                
             }
 
-            $er= true;
-            $peg = Pegawai::paginate(5);
-            return view('tunjangan_pegawai.create', compact('er','peg'));
         
-
-        }
         $tunjangan_pegawai['kode_tunjangan_id'] = $check->id;
-            Tunjangan_pegawai::create($tunjangan_pegawai);
+        Tunjangan_pegawai::create($tunjangan_pegawai);
         
         return redirect('tunjangan_pegawai');
     }

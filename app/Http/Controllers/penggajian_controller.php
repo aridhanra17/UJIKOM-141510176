@@ -166,6 +166,8 @@ class penggajian_controller extends Controller
     public function edit($id)
     {
         //
+        $peng = Penggajian::find($id);
+        return view('penggajian.index', compact('peng'));
     }
 
     /**
@@ -178,6 +180,11 @@ class penggajian_controller extends Controller
     public function update(Request $request, $id)
     {
         //
+        $cariid = Penggajian::find($id);
+
+        $cariid->status_pengambilan = 1;
+        $cariid->save();
+        return view('penggajian.index', compact('cariid'));
     }
 
     /**

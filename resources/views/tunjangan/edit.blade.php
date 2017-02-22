@@ -22,8 +22,8 @@
                     <div class="form-group {{ $errors->has('jabatan_id') ? ' has-error' : 'pesan' }}">
                         {!! Form::label ('Nama Jabatan', ' Nama Jabatan:') !!}
                         <select class="form-control" name="jabatan_id">
-                        <option value="">---Nama Jabatan---</option>
-                            @foreach($jb as $data)
+                        <option value="{{$jab1->id}}" selected>{{$jab1->nama_jabatan}}</option>
+                            @foreach($jab2 as $data)
                             <option value="{!! $data->id!!}">{!! $data->nama_jabatan!!} </option>
                             @endforeach
                         </select>
@@ -36,8 +36,8 @@
                     <div class="form-group{{ $errors->has('golongan_id') ? ' has-error' : 'pesan' }}">
                         {!! Form::label ('Nama Golongan', ' Nama Golongan:') !!}
                         <select class="form-control" name="golongan_id">
-                        <option value="">---Nama Golongan---</option>
-                            @foreach($gol as $data)
+                        <option value="{{$gol1->id}}" selected>{{$gol1->nama_golongan}}</option>
+                            @foreach($gol2 as $data)
                             <option value="{!! $data->id!!}">{!! $data->nama_golongan!!} </option>
                             @endforeach
                         </select>

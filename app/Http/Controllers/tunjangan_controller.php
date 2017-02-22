@@ -100,9 +100,13 @@ class tunjangan_controller extends Controller
     {
         //
         $tun = Tunjangan::find($id);
-        $jb = Jabatan::all();
-        $gol = Golongan::all();
-        return view('tunjangan.edit', compact('tun','jb','gol'));
+        $jab1 = Jabatan::whereIn('id',[$tun->jabatan_id])->first();
+        $gol1 = Golongan::whereIn('id', [$tun->golongan_id])->first();
+
+        $jab2 = Jabatan::whereNotIn('id',[$tun->jabatan_id])->get();
+        $gol2 = Golongan::whereNotIn('id',[$tun->golongan_id])->get();
+
+        return view('tunjangan.edit', compact('tun','jab1','gol1','jab2','gol2'));
     }
 
     /**

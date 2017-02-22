@@ -136,6 +136,7 @@ class pegawai_controller extends Controller
             $kategori_lembur = new Kategori_lembur;
             $kategori_lembur->jabatan_id=$tambah->jabatan_id;
             $kategori_lembur->golongan_id=$tambah->golongan_id;
+            $no = 0;
             $kategori_lembur->kode_lembur="KodeLem"."-".$tambah->jabatan_id."-".$tambah->golongan_id;
             $kategori_lembur->besaran_uang=0;
             $kategori_lembur->save();
@@ -169,13 +170,15 @@ class pegawai_controller extends Controller
     {
         //
         $peg = Pegawai::find($id);
+        $jab = Jabatan::all();
+        $gol = Golongan::all();
         $jab1 = Jabatan::whereIn('id',[$peg->jabatan_id])->first();
         $gol1= Golongan::whereIn('id', [$peg->golongan_id])->first();
 
         $jab2 = Jabatan::whereNotIn('id',[$peg->jabatan_id])->get();
         $gol2 = Golongan::whereNotIn('id', [$peg->golongan_id])->get();
 
-        return view('pegawai.edit', compact('peg','jab1','gol1','jab2', 'gol2'));
+        return view('pegawai.edit', compact('peg','jab1','gol1','jab2', 'gol2','jab','gol'));
         
     }
 
@@ -189,40 +192,13 @@ class pegawai_controller extends Controller
     public function update(Request $request, $id)
     {
         $cariid = Pegawai::find($id);
-        /*if($cariid->nip == Request('nip'))
-        {
-            $peg = array (
-                    'nip'=>'required',
-                    'jabatan_id'=>'required',
-                    'golongan_id'=>'required',
-                    'photo'=>'required',
-            );
-        }
-        else {
-            $peg = array (
-                    'nip'=>'required|unique:pegawais',
-                    'jabatan_id'=>'required',
-                    'golongan_id'=>'required',
-                    'photo'=>'required',
-            );
-        }
-        $pesan = array(
-            'nip.unique' => 'Maaf NIP Sudah Ada',
-            'jabatan_id.required' =>'Harus Diisi broo',
-            'golongan_id.required' =>'Harus Diisi broo',
-            'photo.required' =>'Harus Diisi broo',
-            );
-        $validation = Validator::make(Request::all(), $peg, $pesan);
-        if($validation->fails())
-        {
-            return redirect('pegawai/'.$id.'/edit')->withErrors($validation)->withInput();
-        }*/
 
         $cariid->nip = Input::get('nip');
         $cariid->jabatan_id = Input::get('jabatan_id');
         $cariid->golongan_id = Input::get('golongan_id');
-        $cariid->update();
+        $cariid->updated_at = date('Y-m-d H:i:s');
 
+        
         if(Input::hasFile('photo'))
         {
             $filename = null;
@@ -250,7 +226,7 @@ class pegawai_controller extends Controller
             
 
         }
-
+        $cariid->save();
         return redirect('pegawai');
 
 

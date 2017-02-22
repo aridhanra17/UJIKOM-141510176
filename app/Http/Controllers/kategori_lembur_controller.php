@@ -110,6 +110,29 @@ class kategori_lembur_controller extends Controller
     public function update(Request $request, $id)
     {
         //
+        $cariid=Kategori_lembur::find($id);
+        if($cariid->kode_lembur == Request('kode_lembur'))
+        {
+            $kl = array (
+            'kode_lembur'=>'required',
+            );
+        }
+        else
+        {
+            $kl = array (
+            'kode_lembur'=>'required|unique:kategori_lemburs',
+            );
+        }
+        $pesan = array(
+            'kode_lembur.unique' =>'Maaf Kode Lembur Telah Terpakai',
+            );
+
+        $validation = Validator::make(Request::all(), $kl, $pesan);
+
+        if($validation->fails())
+        {
+            return redirect('kategori_lembur/'.$id.'/edit')->withErrors($validation)->withInput();
+        }
         $kl = Request::all();
         $ka_lem = Kategori_lembur::find($id);
         $ka_lem->update($kl);

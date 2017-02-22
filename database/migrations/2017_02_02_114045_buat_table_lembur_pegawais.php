@@ -15,7 +15,7 @@ class BuatTableLemburPegawais extends Migration
     {
         Schema::create('lembur_pegawais', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('kode_lembur_id')->unique();
+            $table->integer('kode_lembur_id');
             $table->integer('pegawai_id')->unsigned();
             $table->foreign('pegawai_id')->references('id')->on('pegawais')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->integer('jumlah_jam');

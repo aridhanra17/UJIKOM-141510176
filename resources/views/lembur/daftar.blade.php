@@ -9,9 +9,9 @@
 
                 <div class="panel-body">
 
-                    <center>
-                    <a href="{{route('lembur_pegawai.create')}}" class="btn btn-success">Tambah Data</a>
-                    </center>
+                    <center><a href="{{route('lembur_pegawai.create')}}" class="btn btn-success">Tambah Data</a> <a href="" class="btn btn-success">Daftar Data</a></td></center>
+                    
+                <tr>
 	<br>
 	<br>
 	<table class="table table-bordered">
@@ -19,7 +19,6 @@
 			<tr class="bg-info">
 				<th>No</th>
 				<th>Tanggal</th>
-				<th>Kode Lembur</th>
 				<th>Nama Pegawai</th>
 				<th>Jumlah Jam</th>
 				<th colspan="2"><center>Action</center></th>
@@ -28,12 +27,11 @@
 		@php
 		$no = 1;
 		@endphp
+		@foreach($rekap as $data)
 		<tbody>
-		@foreach($lp as $data)
 			<td>{{$no++}}</td>
-			<td>{{$tanggal}}</td>
-			<td>{{$data->Kategori_lembur->kode_lembur}}</td>
-			<td>{{$data->Pegawai->User->name}}</td>
+			<td>{{$data->created_at}}</td>
+			<td></td>
 			<td>{{$data->jumlah_jam}}</td>
 			<td><center><a href="{{route('lembur_pegawai.edit', $data->id)}}" class="btn btn-warning">Edit</a></center></td>
 			<td><center>

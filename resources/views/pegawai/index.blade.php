@@ -39,16 +39,7 @@
 				<td>{{$data->User->name}}</td>
 				<td>{{$data->Jabatan->nama_jabatan}}</td>
 				<td>{{$data->Golongan->nama_golongan}}</td>
-				@php
-				if($data->photo == 0)
-				{ @endphp
-					<td><img src="gambar/user.png " width="30" height="30"></td>
-				@php}
-				else
-				{@endphp
-					<td><img src="{{ asset('gambar/'.$data->photo.'') }}" width="30" height="30"></td>
-				@php}
-				@endphp
+				<td><img src="{{ asset('gambar/'.$data->photo.'') }}" width="30" height="30"></td>
 				@if (Auth::user()->permission == "Super Admin" || Auth::user()->permission == "Admin" )
 				<td><center><a href="{{route('pegawai.show', $data->id)}}" class="btn btn-primary">Lihat</a></center></td>
 				<td><center><a href="{{route('pegawai.edit', $data->id)}}" class="btn btn-warning">Edit</a></center></td>

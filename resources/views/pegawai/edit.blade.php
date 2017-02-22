@@ -20,36 +20,33 @@
                                 @endif
 					</div>
                     <div class="form-group{{ $errors->has('jabatan_id') ? ' has-error' : '' }}">
-                            <label for="jabatan_id">Nama Jabatan</label>
-
-                            
-                                <select name="jabatan_id" class="form-control">
-                                    <option value="{{$jab1->id}}" selected>{{$jab1->nama_jabatan}}</option>
-                                    @foreach($jab2 as $data)
-                                    <option value="{{$data->id}}" selected>{{$data->nama_jabatan}}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('jabatan_id'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('jabatan_id') }}</strong>
-                                    </span>
-                                @endif
-                        </div>
-
-                        <div class="form-group{{ $errors->has('golongan_id') ? ' has-error' : '' }}">
-                            <label for="golongan_id" >Nama Golongan</label>
-                                <select name="golongan_id" class="form-control">
-                                    <option value="{{$gol1}}">{{$gol1->nama_golongan}}</option>
-                                    @foreach($gol2 as $data)
-                                    <option value="{{$data->id}}">{{$data->nama_golongan}}</option>
-                                    @endforeach
-                                </select><br>
-                                @if ($errors->has('golongan_id'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('golongan_id') }}</strong>
-                                    </span>
-                                @endif
-                        </div>
+                        {!! Form::label ('Nama Jabatan', ' Nama Jabatan:') !!}
+                        <select class="form-control" name="jabatan_id">
+                        <option value="">---Nama Jabatan---</option>
+                            @foreach($jab as $data)
+                            <option value="{!! $data->id!!}">{!! $data->nama_jabatan!!} </option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('jabatan_id'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('jabatan_id') }}</strong>
+                                                    </span>
+                        @endif
+                    </div>
+                    <div class="form-group{{ $errors->has('golongan_id') ? ' has-error' : '' }}">
+                        {!! Form::label ('Nama Golongan', ' Nama Golongan:') !!}
+                        <select class="form-control" name="golongan_id">
+                        <option value="">---Nama Golongan---</option>
+                            @foreach($gol as $data)
+                            <option value="{!! $data->id!!}">{!! $data->nama_golongan!!} </option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('golongan_id'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('golongan_id') }}</strong>
+                                                    </span>
+                        @endif
+                    </div>
 
                         <div class="form-group">
                             {!! Form::label('Foto', 'Foto :')!!}
