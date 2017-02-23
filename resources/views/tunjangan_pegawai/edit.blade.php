@@ -13,14 +13,16 @@
 				<div class="form-group{{ $errors->has('pegawai_id') ? ' has-error' : '' }}">
 						{!! Form::label ('Nama Pegawai', ' Nama Pegawai:') !!}
 						<select class="form-control" name="pegawai_id">
-						<option value="">---NIP--- || ---Nama Pegawai--- || ---Jabatan--- || --Golongan--</option>
-							@foreach($peg as $data)
+						<option value="{{$peg->id}}" selected>{{$peg->nip}} || {!! $peg->User->name!!} || {!! $peg->Jabatan->nama_jabatan!!} || {!! $peg->Golongan->nama_golongan!!}</option>
+							@foreach($nopeg as $data)
 							<option value="{!! $data->id!!}">{!! $data->nip!!} || {!! $data->User->name!!} || {!! $data->Jabatan->nama_jabatan!!} || {!! $data->Golongan->nama_golongan!!} </option>
 							@endforeach
 						</select>
+
 						@if (isset($error)) 
 						<div>Maaf Tunjangan Tidak Terdaftar!!! Buat Terlebih Dahulu Tunjangan!!!</div>
 						@endif
+						
 						@if ($errors->has('pegawai_id'))
 				                                    <span class="help-block">
 				                                        <strong>{{ $errors->first('pegawai_id') }}</strong>

@@ -136,8 +136,8 @@ class pegawai_controller extends Controller
             $kategori_lembur = new Kategori_lembur;
             $kategori_lembur->jabatan_id=$tambah->jabatan_id;
             $kategori_lembur->golongan_id=$tambah->golongan_id;
-            $no = 0;
-            $kategori_lembur->kode_lembur="KodeLem"."-".$tambah->jabatan_id."-".$tambah->golongan_id;
+            $tanggal = date('Y-m-d H:i:s');
+            $kategori_lembur->kode_lembur="KodeLem"."-".$tanggal."-".$tambah->jabatan_id."-".$tambah->golongan_id;
             $kategori_lembur->besaran_uang=0;
             $kategori_lembur->save();
           return redirect('pegawai');

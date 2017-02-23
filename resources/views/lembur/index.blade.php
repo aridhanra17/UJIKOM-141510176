@@ -11,6 +11,7 @@
 
                     <center>
                     <a href="{{route('lembur_pegawai.create')}}" class="btn btn-success">Tambah Data</a>
+                    <a href="{{url('daftar_lembur')}}" class="btn btn-success">Jumlah Lembur</a>
                     </center>
 	<br>
 	<br>
@@ -34,7 +35,7 @@
 			<td>{{$tanggal}}</td>
 			<td>{{$data->Kategori_lembur->kode_lembur}}</td>
 			<td>{{$data->Pegawai->User->name}}</td>
-			<td>{{$data->jumlah_jam}}</td>
+			<td>{{$data->jumlah_jam}} Jam</td>
 			<td><center><a href="{{route('lembur_pegawai.edit', $data->id)}}" class="btn btn-warning">Edit</a></center></td>
 			<td><center>
 				<form method="POST" action="{{route('lembur_pegawai.destroy', $data->id)}}">

@@ -1,67 +1,41 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-            <div class="panel-heading">PENGGAJIAN</div>
+                <div class="panel-heading">Tambah Penggajian</div>
                 <div class="panel-body">
-                </div>
-            </div>
-            </div>
-        </div>
-    
- <div class="panel-body panel-primary">
-                    <center><a href="{{route('penggajian.create')}}" class="btn btn-success">Hitung Peggajian</a></center>
-                    <center>{{$penggajian->links()}}</center>
-    <br>
-    <br>
-    <table class="table table-bordered">
-        <thead>
-            <tr class="bg-info">
-                <th>No</th>
-                <th>Id Pegawai</th>
-                <th>Jumlah Jam Lembur</th>
-                <th>Jumlah Uang Lembur</th>
-                <th>Gaji Pokok</th>
-                <th>Total Gaji</th>
-                <th>Tanggal Pengambilan</th>
-                <th>Status Pengambilan</th>
-                <th>Petugas Penerima</th>
-                <th><center>Action</center></th>
-            </tr>
-        </thead>
-        @php
-        $no = 1;
-        @endphp
-        @foreach($penggajian as $data)
-        <tbody>
-            <tr>
-                <td>{{$no++}}</td>
-                <td>{{$data->Tujangan_pegawai->Pegawai->user->name}}</td>
-                <td>{{$data->jumlah_jam_lembur}} </td>
-                <td>{{$data->jumlah_uang_lembur}} </td>
-                <td>{{$data->gaji_pokok}} </td>
-                <td>{{$data->total_gaji}} </td>
-                <td>{{$data->updated_at}} </td>
-                 <td>Sudah Diambil</td>
-                <td>{{$data->petugas_penerima}} </td>
-                
-                <td><center>
-                    <form method="POST" action="{{route('penggajian.destroy', $data->id)}}">
-                    {{csrf_field()}}
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input class="btn btn-danger" onclick="return confirm('Yakin Mau Menghapus Data? ');" type="submit" value="Hapus"></form>
-                </center></td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                    {!! Form::model($peng,['method'=>'PATCH', 'route'=>['penggajian.update', $peng->id]]) !!}
+                        {{ csrf_field() }}
+
+                        <div class="form-group{{ $errors->has('status_pengambilan') ? ' has-error' : '' }}">
+                            <label for="status_pengambilan" class="col-md-4 control-label">Status Pengambilan</label>
+
+                            <div class="col-md-6">
+                                <select name="status_pengambilan" class="form-control">
+                                    <option value="0">Belum Diambil</option>
+                                    <option value="1">Sudah Diambil</option>
+                                </select>
+                                @if ($errors->has('status_pengambilan'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('status_pengambilan') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection
-        

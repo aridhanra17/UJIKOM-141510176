@@ -116,8 +116,9 @@ class tunjangan_pegawai_controller extends Controller
         //
         $tp = Tunjangan_pegawai::find($id);
         $tun = Tunjangan::all();
-        $peg = Pegawai::all();
-        return view('tunjangan_pegawai.edit', compact('tp','tun','peg'));
+        $peg = Pegawai::whereIn('id',[$tp->pegawai_id])->first();
+        $nopeg = Pegawai::whereNotIn('id',[$tp->pegawai_id])->get();
+        return view('tunjangan_pegawai.edit', compact('tp','tun','peg', 'nopeg'));
     }
 
     /**
@@ -130,6 +131,7 @@ class tunjangan_pegawai_controller extends Controller
     public function update(Request $request, $id)
     {
         //
+
         $tp = Request::all();
         //dd($tp);
         $pegawai = Pegawai::where('id', $tp['pegawai_id'])->first();
@@ -141,7 +143,7 @@ class tunjangan_pegawai_controller extends Controller
             $peg = Pegawai::all();
             $tun = Tunjangan::all();
             $error = true;
-        return view('tunjangan_pegawai.create', compact('peg','tun','error'));
+        return redirect('tunjangan_pegawai/'.$id.'/edit');
         }
         $tun_peg = Tunjangan_pegawai::find($id);
         $tun_peg->update($tp);

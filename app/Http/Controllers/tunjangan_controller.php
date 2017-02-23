@@ -37,7 +37,7 @@ class tunjangan_controller extends Controller
     public function create()
     {
         //
-        $jb = Jabatan::all();
+        $jb = Jabatan::all();   
         $gol = Golongan::all();
         return view('tunjangan.create', compact('jb','gol'));
     }
@@ -75,6 +75,19 @@ class tunjangan_controller extends Controller
             return redirect('tunjangan/create')->withErrors($validation)->withInput();
         }
         $tunjangan = Request::all();
+        $anak = $tunjangan['jumlah_anak'];
+        $uang = $tunjangan['besaran_uang'];
+        
+        if($anak < 0 && $uang ==0 )
+        {
+            $error = true;
+            return view('tunjangan.create', compact('error'));
+        }
+        elseif($anak < 0 && $uang <0)
+        {
+            $error = true;
+            return view('tunjangan.create', compact('error'));
+        }
         Tunjangan::create($tunjangan);
         return redirect('tunjangan');
     }

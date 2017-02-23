@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
 
-                    <center><a href="{{route('lembur_pegawai.create')}}" class="btn btn-success">Tambah Data</a> <a href="" class="btn btn-success">Daftar Data</a></td></center>
+                    <center><a href="{{route('lembur_pegawai.create')}}" class="btn btn-success">Tambah Data</a> <a href="{{route('lembur_pegawai.index')}}" class="btn btn-success">Daftar Data</a></td></center>
                     
                 <tr>
 	<br>
@@ -30,8 +30,8 @@
 		@foreach($rekap as $data)
 		<tbody>
 			<td>{{$no++}}</td>
-			<td>{{$data->created_at}}</td>
-			<td></td>
+			<td>{{$tanggal}}</td>
+			<td>{{$data->id}}</td>
 			<td>{{$data->jumlah_jam}}</td>
 			<td><center><a href="{{route('lembur_pegawai.edit', $data->id)}}" class="btn btn-warning">Edit</a></center></td>
 			<td><center>

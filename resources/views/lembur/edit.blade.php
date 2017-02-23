@@ -12,7 +12,12 @@
 				<div class="form-group">
 						{!! Form::label('Jumlah Jam','Jumlah Jam :') !!}
 						{!!Form::text('jumlah_jam',null,['class'=>'form-control']) !!}
-						
+						@if(isset($error))
+                                <div>Maaf Tunjangan Tidak Terdaftar!!! Buat Terlebih Dahulu Tunjangan!!!</div>
+                            @endif
+                            @if(isset($er))
+                                <div>Tunjangan Pegawai Sudah Ada!
+                            @endif
 					</div>
 				<div class="form-group">
                         {!! Form::submit('Save',['class'=>'btn btn-primary form control']) !!}

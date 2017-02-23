@@ -57,11 +57,15 @@
 					<div class="form-group{{ $errors->has('jumlah_anak') ? ' has-error' : 'pesan' }}">
 						{!! Form::label ('Jumlah Anak','Jumlah Anak')!!}
 						<input type="text" name="jumlah_anak" class="form-control">
+						
 						@if ($errors->has('jumlah_anak'))
 				                                    <span class="help-block">
 				                                        <strong>{{ $errors->first('jumlah_anak') }}</strong>
 				                                    </span>
 				            @endif
+				            @if(isset($error))
+								<div>Maaf Jumlah Anak Tidak Boleh Negatif !!!</div>
+							@endif
 					</div>
 					<div class="form-group{{ $errors->has('besaran_uang') ? ' has-error' : 'pesan' }}">
 						{!! Form::label ('Besaran Uang','Besaran Uang')!!}
@@ -71,6 +75,12 @@
 				                                        <strong>{{ $errors->first('besaran_uang') }}</strong>
 				                                    </span>
 				            @endif
+				        @if(isset($err))
+								<div>Maaf Besaran Uang Tidak Boleh Nol !!!</div>
+						@endif
+				        @if(isset($error))
+								<div>Maaf Besaran Uang Tidak Boleh Negatif !!!</div>
+							@endif
 					</div>
 
 

@@ -22,7 +22,7 @@
 					<div class="form-group{{ $errors->has('nama_golongan') ? ' has-error' : 'pesan' }}">
 						{!! Form::label ('Nama Golongan', 'Nama Golongan :') !!}
 						<input type="text" name="nama_golongan" class="form-control" required>
-						@if ($errors->has('nama_jabatan'))
+						@if ($errors->has('nama_golongan'))
 				                                    <span class="help-block">
 				                                        <strong>{{ $errors->first('nama_golongan') }}</strong>
 				                                    </span>
@@ -32,6 +32,14 @@
 					<div class="form-group{{ $errors->has('besaran_uang') ? ' has-error' : 'pesan' }}">
 						{!! Form::label ('Besaran Uang', 'Besaran Uang :') !!}
 						<input type="text" name="besaran_uang" class="form-control" required>
+						
+				        @if(isset($err))
+								<div>Maaf Besaran Uang Tidak Boleh Nol !!!</div>
+						@endif
+				        @if(isset($error))
+								<div>Maaf Besaran Uang Tidak Boleh Negatif !!!</div>
+							@endif
+							
 						@if ($errors->has('besaran_uang'))
 				                                    <span class="help-block">
 				                                        <strong>{{ $errors->first('besaran_uang') }}</strong>

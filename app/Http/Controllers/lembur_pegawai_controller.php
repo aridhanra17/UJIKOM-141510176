@@ -95,19 +95,6 @@ class lembur_pegawai_controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function daftar()
-    {
-        $kt = Kategori_lembur::all();
-        $waktu = Carbon::now()->endOfMonth();
-        $tanggal = Carbon::now()->toDateString();
-        $pegawai= Pegawai::all();
-        $rekap = Pegawai::select('pegawais.id', DB::raw('sum(lembur_pegawais.jumlah_jam) as jumlah_jam'))
-            ->join('lembur_pegawais', 'lembur_pegawais.pegawai_id', '=', 'pegawais.id')
-            ->groupBy('id')
-            ->get();
-        //dd($rekap);
-        return view('lembur.daftar',compact('kt','waktu','tanggal','pegawai', 'rekap'));
-    }
     public function show($id)
     {
         //

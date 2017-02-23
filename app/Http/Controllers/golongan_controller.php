@@ -62,8 +62,19 @@ class golongan_controller extends Controller
             return redirect('golongan/create')->withErrors($validation)->withInput();
         }
 
-        $jbt = Request::all();
-        Golongan::create($jbt);
+        $gol = Request::all();
+        $uang = $gol['besaran_uang'];
+        if($uang == 0)
+        {
+            $err = true;
+            return view('golongan.create', compact('err'));
+        }
+        elseif($uang < 0)
+        {
+            $error = true;
+            return view('golongan.create', compact('error'));
+        }
+        Golongan::create($gol);
         
         return redirect('golongan');
     }
@@ -133,6 +144,17 @@ class golongan_controller extends Controller
 
         $gol = Request::all();
         $golongan = Golongan::find($id);
+        $uang = $golongan['besaran_uang'];
+        if($uang == 0)
+        {
+            $err = true;
+            return redirect('golongan/'.$id.'/edit');
+        }
+        elseif($uang < 0)
+        {
+            $error = true;
+            return redirect('golongan/'.$id.'/edit');
+        }
         $golongan->update($gol);
         return redirect('golongan');
     }

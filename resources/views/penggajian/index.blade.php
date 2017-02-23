@@ -1,10 +1,9 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-            <div class="panel-heading">PENGGAJIAN</div>
+            <div class="panel-heading ">PENGGAJIAN</div>
 				
             </div>
             </div>
@@ -26,8 +25,7 @@
                 <th>Tanggal Pengambilan</th>
                 <th>Status Pengambilan</th>
                 <th>Petugas Penerima</th>
-                <th></th>
-                <th colspan="3"><center>Action</center></th>
+                <th colspan="2"><center>Action</center></th>
             </tr>
         </thead>
         @php
@@ -38,10 +36,15 @@
             <tr>
                 <td>{{$no++}}</td>
                 <td>{{$data->Tujangan_pegawai->Pegawai->user->name}}</td>
-                <td>{{$data->jumlah_jam_lembur}} </td>
-                <td>{{$data->jumlah_uang_lembur}} </td>
-                <td>{{$data->gaji_pokok}} </td>
-                <td>{{$data->total_gaji}} </td>
+                <td>{{$data->jumlah_jam_lembur}} Jam </td>
+                <?php $data->jumlah_uang_lembur=number_format($data->jumlah_uang_lembur,2,',','.'); ?>
+                <td>Rp. {{$data->jumlah_uang_lembur}} </td>
+
+                <?php $data->gaji_pokok=number_format($data->gaji_pokok,2,',','.'); ?>
+                <td>Rp. {{$data->gaji_pokok}} </td>
+
+                <?php $data->total_gaji=number_format($data->total_gaji,2,',','.'); ?>
+                <td>Rp. {{$data->total_gaji}} </td>
                 <td>{{$data->updated_at}} </td>
                 @if($data->status_pengambilan == 0)
                 
@@ -54,7 +57,8 @@
                 
                 @endif
                 <td>{{$data->petugas_penerima}} </td>
-                <td><center><a href="{{route('penggajian.edit', $data->id)}}" class="btn btn-warning">Sudah Diambil</a></center>{!! Form::close() !!}</td>
+            
+                <td><center><a href="{{route('penggajian.edit', $data->id)}}" class="btn btn-warning">Edit</a></center></td>
 
                 <td><center>
                     <form method="POST" action="{{route('penggajian.destroy', $data->id)}}">
@@ -69,7 +73,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 @endsection

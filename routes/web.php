@@ -35,6 +35,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('jab', 'jabatan_controller@edit');
+Route::get('daftar_lembur', 'daftar_lemburController@index');
 Route::resource('jabatan','jabatan_controller');
 Route::resource('golongan','golongan_controller');
 Route::resource('pegawai','pegawai_controller');

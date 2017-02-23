@@ -19,7 +19,7 @@
 			<tr class="bg-info">
 				<th>No</th>
 				<th>NIP</th>
-				<th>User Id</th>
+				<th>Nama Pegawai</th>
 				<th>Jabatan Id</th>
 				<th>Golongan Id</th>
 				<th>Photo</th>

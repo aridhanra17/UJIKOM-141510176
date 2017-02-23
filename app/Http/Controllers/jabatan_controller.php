@@ -48,7 +48,7 @@ class jabatan_controller extends Controller
         $jb = array (
             'kode_jabatan'=>'required|unique:jabatans',
             'nama_jabatan'=>'required',
-            'besaran_uang'=>'required',
+            'besaran_uang' => 'required'
             );
         $pesan = array(
             'kode_jabatan.required' =>'Harus Diisi broo',
@@ -62,7 +62,19 @@ class jabatan_controller extends Controller
         {
             return redirect('jabatan/create')->withErrors($validation)->withInput();
         }
+
         $jbt = Request::all();
+        $uang = $jbt['besaran_uang'];
+        if($uang == 0)
+        {
+            $err = true;
+            return view('jabatan.create', compact('err'));
+        }
+        elseif($uang < 0)
+        {
+            $error = true;
+            return view('jabatan.create', compact('error'));
+        }
         Jabatan::create($jbt);
         
         return redirect('jabatan');
@@ -135,6 +147,18 @@ class jabatan_controller extends Controller
         
         $jb = Request::all();
         $jbt = Jabatan::find($id);
+
+        $uang = $jbt['besaran_uang'];
+        if($uang == 0)
+        {
+            $err = true;
+            return redirect('jabatan/'.$id.'/edit');
+        }
+        elseif($uang < 0)
+        {
+            $error = true;
+            return redirect('jabatan/'.$id.'/edit');
+        }
         $jbt->update($jb);
         return redirect('jabatan');
     }

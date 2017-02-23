@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -16,6 +16,7 @@ use App\Golongan;
 use App\Pegawai;
 use Validator;
 use App\User;
+use DB;
 use Input;
 
 class penggajian_controller extends Controller
@@ -93,6 +94,12 @@ class penggajian_controller extends Controller
         //dd($jabatan);
         $golongan = Golongan::where('id', $pegawai->golongan_id)->first();
         //dd($golongan);
+        $rekap = Pegawai::select('pegawais.id', DB::raw('sum(lembur_pegawais.jumlah_jam) as jumlah_jam'))
+            ->join('lembur_pegawais', 'lembur_pegawais.pegawai_id', '=', 'pegawais.id')    
+            ->groupBy('id')
+            ->first();
+        //dd($rekap);
+        
         $data_penggajian = Penggajian::where('tunjangan_pegawai_id', $tunjangan_pegawai->id)->first();
 
         $penggajian = new Penggajian;
@@ -132,8 +139,9 @@ class penggajian_controller extends Controller
 
         else
         {
-            $penggajian->jumlah_jam_lembur=$lembur_pegawai->jumlah_jam;
-            $penggajian->jumlah_uang_lembur =($lembur_pegawai->jumlah_jam)*($kategori_lembur->besaran_uang);
+            
+            $penggajian->jumlah_jam_lembur=$rekap->jumlah_jam;
+            $penggajian->jumlah_uang_lembur =($rekap->jumlah_jam)*($kategori_lembur->besaran_uang);
             $penggajian->gaji_pokok=$jabatan->besaran_uang+$golongan->besaran_uang;
             $penggajian->total_gaji = ($lembur_pegawai->jumlah_jam*$kategori_lembur->besaran_uang)+($tunjangan->jumlah_anak*$tunjangan->besaran_uang)+($jabatan->besaran_uang+$golongan->besaran_uang);
             $penggajian->tanggal_pengambilan = date('d-m-y');
@@ -167,7 +175,7 @@ class penggajian_controller extends Controller
     {
         //
         $peng = Penggajian::find($id);
-        return view('penggajian.index', compact('peng'));
+        return view('penggajian.edit', compact('peng'));
     }
 
     /**
@@ -180,11 +188,10 @@ class penggajian_controller extends Controller
     public function update(Request $request, $id)
     {
         //
-        $cariid = Penggajian::find($id);
-
-        $cariid->status_pengambilan = 1;
-        $cariid->save();
-        return view('penggajian.index', compact('cariid'));
+        $penggajian = Request::all();
+        $gaji = Penggajian::find($id);
+        $gaji->update($penggajian);
+        return redirect('penggajian');
     }
 
     /**
