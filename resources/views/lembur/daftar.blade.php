@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appd')
 @section('content')
 
 <div class="container">
@@ -19,7 +19,7 @@
 			<tr class="bg-info">
 				<th>No</th>
 				<th>Tanggal</th>
-				<th>Nama Pegawai</th>
+				<th>Id Pegawai</th>
 				<th>Jumlah Jam</th>
 				<th colspan="2"><center>Action</center></th>
 			</tr>
@@ -30,7 +30,7 @@
 		@foreach($rekap as $data)
 		<tbody>
 			<td>{{$no++}}</td>
-			<td>{{$tanggal}}</td>
+			<td>{{$waktu}}</td>
 			<td>{{$data->id}}</td>
 			<td>{{$data->jumlah_jam}}</td>
 			<td><center><a href="{{route('lembur_pegawai.edit', $data->id)}}" class="btn btn-warning">Edit</a></center></td>

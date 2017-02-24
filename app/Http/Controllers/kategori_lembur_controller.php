@@ -133,8 +133,15 @@ class kategori_lembur_controller extends Controller
         {
             return redirect('kategori_lembur/'.$id.'/edit')->withErrors($validation)->withInput();
         }
+
         $kl = Request::all();
         $ka_lem = Kategori_lembur::find($id);
+        $uang = $kl['besaran_uang'];
+        if($uang < 0)
+        {
+            $error = true;
+            return redirect('kategori_lembur/'.$id.'/edit');
+        }
         $ka_lem->update($kl);
         return redirect('kategori_lembur');
     }

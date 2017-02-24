@@ -144,7 +144,7 @@ class golongan_controller extends Controller
 
         $gol = Request::all();
         $golongan = Golongan::find($id);
-        $uang = $golongan['besaran_uang'];
+        $uang = $gol['besaran_uang'];
         if($uang == 0)
         {
             $err = true;

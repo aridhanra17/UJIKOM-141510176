@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appd')
 
 @section('content')
 <div class="container">
@@ -64,11 +64,17 @@
                                                         <strong>{{ $errors->first('besaran_uang') }}</strong>
                                                     </span>
                             @endif
+                        
                     </div>
                     <div class="form-group">
                         {!! Form::label('Besaran Uang','Besaran Uang :') !!}
                         {!!Form::text('besaran_uang',null,['class'=>'form-control']) !!}
-                        
+                        @if(isset($err))
+                                <div>Maaf Besaran Uang Tidak Boleh Nol !!!</div>
+                        @endif
+                        @if(isset($error))
+                                <div>Maaf Besaran Uang Tidak Boleh Negatif !!!</div>
+                            @endif
                     </div>
                     <div class="form-group">
                         {!! Form::submit('Save',['class'=>'btn btn-primary form control']) !!}

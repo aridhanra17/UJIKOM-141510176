@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appd')
 
 @section('content')
 <div class="container">
@@ -7,7 +7,7 @@
             <div class="panel panel-black panel-primary">
                 <div class="panel-heading ">JABATAN</div>
                 <div class="panel-body">
-				@if(  Auth::user()->permission  == "Super Admin")
+				@if(  Auth::user()->permission  == "Super Admin" || Auth::user()->permission  == "Admin" )
                     <center><a href="{{route('jabatan.create')}}" class="btn btn-success">Tambah Data</a></center>
                 @endif
                     <center>{{$jabatan->links()}}</center>
@@ -16,11 +16,11 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr class="bg-info">
-				<th>No</th>
-				<th>Kode Jabatan</th>
-				<th>Nama Jabatan</th>
-				<th>Besaraan Uang</th>
-				@if (Auth::user()->permission == "Super Admin")
+				<th><center>No</center></th>
+				<th><center>Kode Jabatan</center></th>
+				<th><center>Nama Jabatan</center></th>
+				<th><center>Besaraan Uang</center></th>
+				@if (Auth::user()->permission == "Super Admin" || Auth::user()->permission  == "Admin")
 				<th colspan="3"><center>Action</center></th>
 				@endif
 			</tr>
@@ -32,13 +32,13 @@
 		<tbody>
 			<tr>
 				
-				<td>{{$no++}}</td></font>
-				<td>{{$data->kode_jabatan}}</td>
-				<td>{{$data->nama_jabatan}}</td>
+				<td><center>{{$no++}}</center></td></font>
+				<td><center>{{$data->kode_jabatan}}</center></td>
+				<td><center>{{$data->nama_jabatan}}</center></td>
 				<?php $data->besaran_uang=number_format($data->besaran_uang,2,',','.'); ?>
-				<td>Rp.{{$data->besaran_uang}}</td>
+				<td><center>Rp.{{$data->besaran_uang}}</center></td>
 				</font>
-				@if (Auth::user()->permission == "Super Admin")
+				@if (Auth::user()->permission == "Super Admin" || Auth::user()->permission  == "Admin")
 				<td><center><a href="{{route('jabatan.edit', $data->id)}}" class="btn btn-warning">Edit</a></center></td>
 				<td><center>
 					<form method="POST" action="{{route('jabatan.destroy', $data->id)}}">

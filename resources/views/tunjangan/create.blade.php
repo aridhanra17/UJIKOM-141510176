@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appd')
 @section('content')
 <div class="container">
     <div class="row">
@@ -78,8 +78,14 @@
 				        @if(isset($err))
 								<div>Maaf Besaran Uang Tidak Boleh Nol !!!</div>
 						@endif
-				        @if(isset($error))
+				        @if(isset($er))
 								<div>Maaf Besaran Uang Tidak Boleh Negatif !!!</div>
+							@endif
+						@if(isset($anak_uang))
+								<div>Maaf Jumlah Anak & Besaran Uang Tidak Boleh Negatif !!!</div>
+							@endif
+						@if(isset($anak_uang0))
+								<div>Maaf Jumlah Anak Tidak Boleh Negatif & Besaran Uang Tidak Boleh Nol !!!</div>
 							@endif
 					</div>
 

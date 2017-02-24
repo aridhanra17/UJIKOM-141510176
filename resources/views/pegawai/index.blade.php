@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appd')
 
 @section('content')
 <div class="container">
@@ -10,19 +10,20 @@
                 <div class="panel-body panel-primary">
                 @if (Auth::user()->permission == "Super Admin" || Auth::user()->permission == "Admin" )
                     <center><a href="{{route('pegawai.create')}}" class="btn btn-success">Tambah Data</a></center>
-                    <center>{{$pegawai->links()}}</center>
                 @endif
+                    <center>{{$pegawai->links()}}</center>
+                
 	<br>
 	<br>
 	<table class="table table-bordered">
 		<thead>
 			<tr class="bg-info">
-				<th>No</th>
-				<th>NIP</th>
-				<th>Nama Pegawai</th>
-				<th>Jabatan Id</th>
-				<th>Golongan Id</th>
-				<th>Photo</th>
+				<th><center>No</center></th>
+				<th><center>NIP</center></th>
+				<th><center>Nama Pegawai</center></th>
+				<th><center>Jabatan Id</center></th>
+				<th><center>Golongan Id</center></th>
+				<th><center>Foto</center></th>
 				@if (Auth::user()->permission == "Super Admin" || Auth::user()->permission == "Admin" )
 				<th colspan="3"><center>Action</center></th>
 				@endif
@@ -34,12 +35,17 @@
 		@foreach($pegawai as $data)
 		<tbody>
 			<tr>
-				<td>{{$no++}}</td>
-				<td>{{$data->nip}}</td>
-				<td>{{$data->User->name}}</td>
-				<td>{{$data->Jabatan->nama_jabatan}}</td>
-				<td>{{$data->Golongan->nama_golongan}}</td>
-				<td><img src="{{ asset('gambar/'.$data->photo.'') }}" width="30" height="30"></td>
+				<td><center>{{$no++}}</center></td>
+				<td><center>{{$data->nip}}<center></td>
+				<td><center>{{$data->User->name}}<center></td>
+				<td><center>{{$data->Jabatan->nama_jabatan}}</center>   </td>
+				<td><center>{{$data->Golongan->nama_golongan}}</center>   </td>
+				@if(empty($data->photo))
+				<td><center><img src="{{asset('gambar/user.png')}}" width="30" height="30"></center></td>
+				@endif
+				@if(!empty($data->photo))
+				<td><center><img src="{{ asset('gambar/'.$data->photo.'') }}" width="30" height="30"></center></td>
+				@endif
 				@if (Auth::user()->permission == "Super Admin" || Auth::user()->permission == "Admin" )
 				<td><center><a href="{{route('pegawai.show', $data->id)}}" class="btn btn-primary">Lihat</a></center></td>
 				<td><center><a href="{{route('pegawai.edit', $data->id)}}" class="btn btn-warning">Edit</a></center></td>

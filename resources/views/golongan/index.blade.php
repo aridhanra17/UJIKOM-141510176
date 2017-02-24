@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appd')
 
 @section('content')
 <div class="container">
@@ -7,7 +7,7 @@
             <div class="panel panel-black panel-primary">
                 <div class="panel-heading">GOLONGAN</div>
                 <div class="panel-body">
-                @if (Auth::user()->permission == "Super Admin")
+                @if (Auth::user()->permission == "Super Admin" || Auth::user()->permission  == "Admin")
                     <center><a href="{{route('golongan.create')}}" class="btn btn-success">Tambah Data</a></center>
                     <center>{{$gol->links()}}</center>
                 @endif
@@ -16,11 +16,11 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr class="bg-info">
-				<th>No</th>
-				<th>Kode Golongan</th>
-				<th>Nama Golongan</th>
-				<th>Besaraan Uang</th>
-				@if (Auth::user()->permission == "Super Admin")
+				<th><center>No</center></th>
+				<th><center>Kode Golongan</center></th>
+				<th><center>Nama Golongan<center></th>
+				<th><center>Besaraan Uang</center></th>
+				@if (Auth::user()->permission == "Super Admin" || Auth::user()->permission  == "Admin")
 				<th colspan="3"><center>Action</center></th>
 				@endif
 			</tr>
@@ -31,12 +31,12 @@
 		@foreach($gol as $data)
 		<tbody>
 			<tr>
-				<td>{{$no++}}</td>
-				<td>{{$data->kode_golongan}}</td>
-				<td>{{$data->nama_golongan}}</td>
+				<td><center>{{$no++}}</center></td>
+				<td><center>{{$data->kode_golongan}}</center></td>
+				<td><center>{{$data->nama_golongan}}</center></td>
 				<?php $data->besaran_uang=number_format($data->besaran_uang,2,',','.'); ?>
-				<td>Rp.{{$data->besaran_uang}}</td>
-				@if (Auth::user()->permission == "Super Admin")
+				<td><center>Rp.{{$data->besaran_uang}}</center></td>
+				@if (Auth::user()->permission == "Super Admin" || Auth::user()->permission  == "Admin")
 				<td><center><a href="{{route('golongan.edit', $data->id)}}" class="btn btn-warning">Edit</a></center></td>
 				<td><center>
 					<form method="POST" action="{{route('golongan.destroy', $data->id)}}">

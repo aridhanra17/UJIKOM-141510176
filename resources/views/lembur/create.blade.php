@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appd')
 @section('content')
 <div class="container">
     <div class="row">
@@ -25,18 +25,16 @@
 					<div class="form-group{{ $errors->has('jumlah_jam') ? ' has-error' : 'pesan' }}">
 						{!! Form::label ('Jumlah Jam', 'Jumlah Jam :') !!}
 							<input type="text" name="jumlah_jam" class="form-control" required>
-							@if(isset($error))
-								<div>Maaf Tunjangan Tidak Terdaftar!!! Buat Terlebih Dahulu Tunjangan!!!</div>
-							@endif
-							@if(isset($er))
-								<div>Tunjangan Pegawai Sudah Ada!
-							@endif
 
 							@if ($errors->has('jumlah_jam'))
 				                                    <span class="help-block">
 				                                        <strong>{{ $errors->first('jumlah_jam') }}</strong>
 				                                    </span>
 				            @endif
+
+				            @if(isset($error))
+								<div>Maaf Jumlah Jam Tidak Boleh Negatif !!!</div>
+							@endif
 					</div>
 					<br>
 					<div class="form-group">

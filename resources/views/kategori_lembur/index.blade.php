@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appd')
 @section('content')
 
 <div class="container">
@@ -8,7 +8,9 @@
                 <div class="panel-heading">KATEGORI LEMBUR</div>
 
                 <div class="panel-body">
+                @if(  Auth::user()->permission  == "Super Admin" || Auth::user()->permission  == "Keuangan" )
                     <center><a href="{{route('kategori_lembur.create')}}" class="btn btn-success">Tambah Data</a></center>
+                @endif
                     <center>{{$kl->links()}}</center>
 	<br>
 	<br>
@@ -20,7 +22,9 @@
 				<th>Nama Jabatan</th>
 				<th>Nama Golongan</th>
 				<th>Besaran Uang</th>
+				@if(  Auth::user()->permission  == "Super Admin" || Auth::user()->permission  == "Keuangan" )
 				<th colspan="3"><center>Action</center></th>
+				@endif
 			</tr>
 		</thead>
 		@php
@@ -34,6 +38,7 @@
 			<td>{{$data->Golongan->nama_golongan}}</td>
 			<?php $data->besaran_uang=number_format($data->besaran_uang,2,',','.'); ?>
 			<td>Rp.{{$data->besaran_uang}}</td>
+			@if(  Auth::user()->permission  == "Super Admin" || Auth::user()->permission  == "Keuangan" )
 			<td><center><a href="{{route('kategori_lembur.edit', $data->id)}}" class="btn btn-warning">Edit</a></center></td>
 			<td><center>
 				<form method="POST" action="{{route('kategori_lembur.destroy', $data->id)}}">
@@ -41,6 +46,7 @@
 					<input type="hidden" name="_method" value="DELETE">
 					<input class="btn btn-danger" onclick="return confirm('Yakin Mau Menghapus Data? ');" type="submit" value="Hapus"></form>
 				</center></td>
+			@endif
 		</tbody>
 		@endforeach
 		</table>

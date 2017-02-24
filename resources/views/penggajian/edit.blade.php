@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.appd')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+            <div class="panel panel-default panel-primary">
                 <div class="panel-heading">Tambah Penggajian</div>
                 <div class="panel-body">
                     {!! Form::model($peng,['method'=>'PATCH', 'route'=>['penggajian.update', $peng->id]]) !!}

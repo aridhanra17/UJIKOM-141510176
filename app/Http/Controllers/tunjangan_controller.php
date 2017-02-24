@@ -76,17 +76,44 @@ class tunjangan_controller extends Controller
         }
         $tunjangan = Request::all();
         $anak = $tunjangan['jumlah_anak'];
+        //dd($anak);
         $uang = $tunjangan['besaran_uang'];
-        
-        if($anak < 0 && $uang ==0 )
+        //dd($uang);
+
+        if($anak < 0 && $uang<0 )
         {
-            $error = true;
-            return view('tunjangan.create', compact('error'));
+            $jb = Jabatan::all();   
+            $gol = Golongan::all();
+            $anak_uang = true;
+            return view('tunjangan.create', compact('anak_uang','jb','gol'));
         }
-        elseif($anak < 0 && $uang <0)
+        if($anak < 0 && $uang==0 )
         {
+            $jb = Jabatan::all();   
+            $gol = Golongan::all();
+            $anak_uang0 = true;
+            return view('tunjangan.create', compact('anak_uang0','jb','gol'));
+        }
+        elseif($anak < 0 )
+        {
+            $jb = Jabatan::all();   
+            $gol = Golongan::all();
             $error = true;
-            return view('tunjangan.create', compact('error'));
+            return view('tunjangan.create', compact('error','jb','gol'));
+        }
+        elseif($uang ==0 )
+        {
+            $jb = Jabatan::all();   
+            $gol = Golongan::all();
+            $err = true;
+            return view('tunjangan.create', compact('err','jb','gol'));
+        }
+        elseif($uang <0)
+        {
+            $jb = Jabatan::all();   
+            $gol = Golongan::all();
+            $er = true;
+            return view('tunjangan.create', compact('er','jb','gol'));
         }
         Tunjangan::create($tunjangan);
         return redirect('tunjangan');
@@ -171,6 +198,46 @@ class tunjangan_controller extends Controller
         }
         $tun = Request::all();
         $tunjangan = Tunjangan::find($id);
+        $anak = $tun['jumlah_anak'];
+        //dd($anak);
+        $uang = $tun['besaran_uang'];
+        //dd($uang);
+
+        if($anak < 0 && $uang<0 )
+        {
+            $jb = Jabatan::all();   
+            $gol = Golongan::all();
+            $anak_uang = true;
+            return redirect('tunjangan/'.$id.'/edit');
+        }
+        if($anak < 0 && $uang==0 )
+        {
+            $jb = Jabatan::all();   
+            $gol = Golongan::all();
+            $anak_uang0 = true;
+            return redirect('tunjangan/'.$id.'/edit');
+        }
+        elseif($anak < 0 )
+        {
+            $jb = Jabatan::all();   
+            $gol = Golongan::all();
+            $error = true;
+            return redirect('tunjangan/'.$id.'/edit');
+        }
+        elseif($uang ==0 )
+        {
+            $jb = Jabatan::all();   
+            $gol = Golongan::all();
+            $err = true;
+            return redirect('tunjangan/'.$id.'/edit');
+        }
+        elseif($uang <0)
+        {
+            $jb = Jabatan::all();   
+            $gol = Golongan::all();
+            $er = true;
+            return redirect('tunjangan/'.$id.'/edit');
+        }
         $tunjangan->update($tun);
         return redirect('tunjangan');
     }

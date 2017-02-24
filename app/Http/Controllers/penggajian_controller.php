@@ -103,6 +103,7 @@ class penggajian_controller extends Controller
         $data_penggajian = Penggajian::where('tunjangan_pegawai_id', $tunjangan_pegawai->id)->first();
 
         $penggajian = new Penggajian;
+    
 
         if(isset($data_penggajian))
         {
@@ -115,7 +116,7 @@ class penggajian_controller extends Controller
             $penggajian->jumlah_jam_lembur= $nol;
             $penggajian->jumlah_uang_lembur = $nol;
             $penggajian->gaji_pokok=$jabatan->besaran_uang+$golongan->besaran_uang;
-            $penggajian->total_gaji = ($tunjangan->jumlah_anak*$tunjangan->besaran_uang)+($jabatan->besaran_uang+$golongan->besaran_uang);
+            $penggajian->total_gaji = ($tunjangan->besaran_uang)+($jabatan->besaran_uang+$golongan->besaran_uang);
             $penggajian->tanggal_pengambilan = date('d-m-y');
             $penggajian->status_pengambilan = Input::get('status_pengambilan');
             $penggajian->tunjangan_pegawai_id = Input::get('tunjangan_pegawai_id');
@@ -129,7 +130,7 @@ class penggajian_controller extends Controller
             $penggajian->jumlah_jam_lembur= $nol;
             $penggajian->jumlah_uang_lembur = $nol;
             $penggajian->gaji_pokok=$jabatan->besaran_uang+$golongan->besaran_uang;
-            $penggajian->total_gaji = ($tunjangan->jumlah_anak*$tunjangan->besaran_uang)+($jabatan->besaran_uang+$golongan->besaran_uang);
+            $penggajian->total_gaji = ($tunjangan->besaran_uang)+($jabatan->besaran_uang+$golongan->besaran_uang);
             $penggajian->tanggal_pengambilan = date('d-m-y');
             $penggajian->status_pengambilan = Input::get('status_pengambilan');
             $penggajian->tunjangan_pegawai_id = Input::get('tunjangan_pegawai_id');
@@ -143,7 +144,7 @@ class penggajian_controller extends Controller
             $penggajian->jumlah_jam_lembur=$rekap->jumlah_jam;
             $penggajian->jumlah_uang_lembur =($rekap->jumlah_jam)*($kategori_lembur->besaran_uang);
             $penggajian->gaji_pokok=$jabatan->besaran_uang+$golongan->besaran_uang;
-            $penggajian->total_gaji = ($lembur_pegawai->jumlah_jam*$kategori_lembur->besaran_uang)+($tunjangan->jumlah_anak*$tunjangan->besaran_uang)+($jabatan->besaran_uang+$golongan->besaran_uang);
+            $penggajian->total_gaji = ($lembur_pegawai->jumlah_jam*$kategori_lembur->besaran_uang)+($tunjangan->besaran_uang)+($jabatan->besaran_uang+$golongan->besaran_uang);
             $penggajian->tanggal_pengambilan = date('d-m-y');
             $penggajian->status_pengambilan = Input::get('status_pengambilan');
             $penggajian->tunjangan_pegawai_id = Input::get('tunjangan_pegawai_id');

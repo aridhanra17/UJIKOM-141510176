@@ -148,7 +148,7 @@ class jabatan_controller extends Controller
         $jb = Request::all();
         $jbt = Jabatan::find($id);
 
-        $uang = $jbt['besaran_uang'];
+        $uang = $jb['besaran_uang'];
         if($uang == 0)
         {
             $err = true;

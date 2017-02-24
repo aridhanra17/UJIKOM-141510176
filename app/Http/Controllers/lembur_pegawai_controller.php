@@ -70,6 +70,7 @@ class lembur_pegawai_controller extends Controller
 
         $lembur_pegawai = Request::all();
         // dd($tunjangan_pegawai);
+        $tanggal = date('Y-m-d');
         $pegawai = Pegawai::where('id', $lembur_pegawai['pegawai_id'])->first();
         //dd($pegawai);
         $check = Kategori_lembur::where('jabatan_id', $pegawai->jabatan_id)->where('golongan_id', $pegawai->golongan_id)->first();
@@ -84,6 +85,16 @@ class lembur_pegawai_controller extends Controller
             }
 
         $lembur_pegawai['kode_lembur_id'] = $check->id;
+
+        $jam = $lembur_pegawai['jumlah_jam'];
+        //dd($jam);
+        if($jam < 0)
+        {
+            $peg = Pegawai::all();
+            $kl = Kategori_lembur::all();
+            $error = true;
+            return view('lembur.create', compact('error','peg','kl'));
+        }
         Lembur_pegawai::create($lembur_pegawai);
         return redirect('lembur_pegawai');
 
@@ -129,6 +140,15 @@ class lembur_pegawai_controller extends Controller
         //
         $lp = Request::all();
         $lem_peg = Lembur_pegawai::find($id);
+        $jam = $lp['jumlah_jam'];
+        //dd($jam);
+        if($jam < 0)
+        {
+            $peg = Pegawai::all();
+            $kl = Kategori_lembur::all();
+            $error = true;
+            return redirect('lembur_pegawai/'.$id.'/edit');
+        }
         $lem_peg->update($lp);
         return redirect('lembur_pegawai');
     }

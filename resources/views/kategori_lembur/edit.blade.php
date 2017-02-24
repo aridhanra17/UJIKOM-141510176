@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appd')
 
 @section('content')
 <div class="container">
@@ -22,6 +22,10 @@
                     <div class="form-group">
                         {!! Form::label('Besaran Uang','Besaran Uang :') !!}
                         {!!Form::text('besaran_uang',null,['class'=>'form-control', 'required']) !!}
+                        
+                            @if(isset($er))
+                                    <div>Maaf Besaran Uang Tidak Boleh Negatif !!!</div>
+                                @endif
                     </div>
                     <div class="form-group">
                         {!! Form::submit('Save',['class'=>'btn btn-primary form control']) !!}

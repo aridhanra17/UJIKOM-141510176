@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appd')
 
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    Hallo!! Kamu login sebagai Admin!
+                    Hallo {{Auth::user()->name}}!! Kamu login sebagai Admin!
                 </div>
             </div>
         </div>

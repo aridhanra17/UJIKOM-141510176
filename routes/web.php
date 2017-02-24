@@ -44,6 +44,8 @@ Route::resource('tunjangan_pegawai','tunjangan_pegawai_controller');
 Route::resource('kategori_lembur','kategori_lembur_controller');
 Route::resource('lembur_pegawai','lembur_pegawai_controller');
 Route::resource('penggajian','penggajian_controller');
+Route::resource('gaji_peg', 'Gaji_controller');
+Route::resource('user', 'user_controller');
 
 Route::group(['middleware' => ['api'],'prefix' => 'api'], function () {
     Route::post('register', 'APIController@register');
