@@ -17,10 +17,10 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr class="bg-info">
-				<th>No</th>
-				<th>Tanggal</th>
-				<th>Id Pegawai</th>
-				<th>Jumlah Jam</th>
+				<th><center>No</center></th>
+				<th><center>Tanggal</center></th>
+				<th><center>Id Pegawai</center></th>
+				<th><center>Jumlah Jam</center></th>
 				<th colspan="2"><center>Action</center></th>
 			</tr>
 		</thead>
@@ -29,10 +29,10 @@
 		@endphp
 		@foreach($rekap as $data)
 		<tbody>
-			<td>{{$no++}}</td>
-			<td>{{$waktu}}</td>
-			<td>{{$data->id}}</td>
-			<td>{{$data->jumlah_jam}}</td>
+			<td><center>{{$no++}}</center></td>
+			<td><center>{{$waktu}}</center></td>
+			<td><center>{{$data->id}}</center></td>
+			<td><center>{{$data->jumlah_jam}}</center></td>
 			<td><center><a href="{{route('lembur_pegawai.edit', $data->id)}}" class="btn btn-warning">Edit</a></center></td>
 			<td><center>
 				<form method="POST" action="{{route('lembur_pegawai.destroy', $data->id)}}">

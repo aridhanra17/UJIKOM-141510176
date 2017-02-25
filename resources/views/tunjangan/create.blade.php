@@ -56,7 +56,7 @@
 					
 					<div class="form-group{{ $errors->has('jumlah_anak') ? ' has-error' : 'pesan' }}">
 						{!! Form::label ('Jumlah Anak','Jumlah Anak')!!}
-						<input type="text" name="jumlah_anak" class="form-control">
+						<input type="number" name="jumlah_anak" class="form-control">
 						
 						@if ($errors->has('jumlah_anak'))
 				                                    <span class="help-block">
@@ -69,7 +69,7 @@
 					</div>
 					<div class="form-group{{ $errors->has('besaran_uang') ? ' has-error' : 'pesan' }}">
 						{!! Form::label ('Besaran Uang','Besaran Uang')!!}
-						<input type="text" name="besaran_uang" class="form-control">
+						<input type="number" name="besaran_uang" class="form-control">
 						@if ($errors->has('besaran_uang'))
 				                                    <span class="help-block">
 				                                        <strong>{{ $errors->first('besaran_uang') }}</strong>

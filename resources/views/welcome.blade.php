@@ -46,7 +46,7 @@
 
                         <div>
                             <span class="icon fa-money"></span>
-                            <h3><a href="{{url('penggajian')}}">Penggajian</a></h3>
+                            <h3><a href="{{url('gaji_peg')}}">Lihat Gaji</a></h3>
                         </div>
 
                     </div>

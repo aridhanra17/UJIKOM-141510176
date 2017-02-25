@@ -21,6 +21,10 @@ use Input;
 
 class Gaji_controller extends Controller
 {
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
   	public function index()
   	{
   		$pengguna = User::where('email', auth::user()->email)->first();

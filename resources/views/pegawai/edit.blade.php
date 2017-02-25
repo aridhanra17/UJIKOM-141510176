@@ -51,21 +51,18 @@
                         <div class="form-group">
                             {!! Form::label('Foto', 'Foto :')!!}
                             <br>
-                            @php
-                            if($peg->photo == 0)
-                            { @endphp
-                                <img src="gambar/user.png " width="80" height="80">
-                            @php}
-                            else
-                            {@endphp
-                                <img src="{{ asset('gambar/'.$peg->photo.'') }}" width="80" height="80"> <br>
-                            @php}
-                            @endphp
+                            @if(empty($peg->photo))
+                            <img src="{{asset('gambar/user.png')}}" width="70" height="70">
+                            @endif
+                            @if(!empty($peg->photo))
+                            <img src="{{ asset('gambar/'.$peg->photo.'') }}" width="70" height="70"> 
+                            @endif
+                            {!! Form::file ('photo', null,['class' => 'form-control'])  !!}
                             
                              <!-- <img src="{{ asset('gambar/'.$peg->photo.'') }}" width="80" height="80"> <br> -->
                            
                             
-                            {!! Form::file ('photo', null,['class' => 'form-control']) !!}
+                            
 
                         </div>
 

@@ -31,7 +31,7 @@
 
 					<div class="form-group{{ $errors->has('besaran_uang') ? ' has-error' : 'pesan' }}">
 						{!! Form::label ('Besaran Uang', 'Besaran Uang :') !!}
-						<input type="text" name="besaran_uang" class="form-control" required>
+						<input type="number" name="besaran_uang" class="form-control" required>
 						
 				        @if(isset($err))
 								<div>Maaf Besaran Uang Tidak Boleh Nol !!!</div>

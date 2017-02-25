@@ -11,9 +11,9 @@
 					<div class="form-group{{ $errors->has('golongan_id') ? ' has-error' : 'pesan' }}">
 						{!! Form::label ('Nama Pegawai', ' Nama Pegawai:') !!}
 						<select class="form-control" name="pegawai_id">
-						<option value="">---Nama Pegawai---</option>
+						<option value="">---NIS--- || ---Nama Pegawai--- </option>
 							@foreach($peg as $data)
-							<option value="{!! $data->id!!}">{!! $data->user->name!!} </option>
+							<option value="{!! $data->id!!}">{!! $data->nip!!} || {!! $data->user->name!!} </option>
 							@endforeach
 						</select>
 						@if ($errors->has('pegawai_id'))
@@ -24,7 +24,7 @@
 					</div>
 					<div class="form-group{{ $errors->has('jumlah_jam') ? ' has-error' : 'pesan' }}">
 						{!! Form::label ('Jumlah Jam', 'Jumlah Jam :') !!}
-							<input type="text" name="jumlah_jam" class="form-control" required>
+							<input type="number" name="jumlah_jam" class="form-control" required>
 
 							@if ($errors->has('jumlah_jam'))
 				                                    <span class="help-block">

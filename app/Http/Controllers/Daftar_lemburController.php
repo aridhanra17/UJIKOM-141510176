@@ -27,14 +27,14 @@ class Daftar_lemburController extends Controller
         $waktu = Carbon::now()->endOfMonth();
         $tanggal = Carbon::now()->toDateString();
         $pegawai= Pegawai::all();
-        
+        $users = User::all();
         $rekap = Pegawai::select('pegawais.id', DB::raw('sum(lembur_pegawais.jumlah_jam) as jumlah_jam'))
             ->join('lembur_pegawais', 'lembur_pegawais.pegawai_id', '=', 'pegawais.id')
             ->where('lembur_pegawais.created_at', '<=', Carbon::now()->endOfMonth())
             ->groupBy('id')
             ->get();
         //dd($rekap);
-        return view('lembur.daftar',compact('kt','waktu','tanggal','pegawai', 'rekap','lem','peg','l'));
+        return view('lembur.daftar',compact('kt','waktu','tanggal','pegawai', 'rekap','lem','peg','users'));
     }
 
     /**

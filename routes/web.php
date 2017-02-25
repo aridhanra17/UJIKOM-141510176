@@ -47,14 +47,6 @@ Route::resource('penggajian','penggajian_controller');
 Route::resource('gaji_peg', 'Gaji_controller');
 Route::resource('user', 'user_controller');
 
-Route::group(['middleware' => ['api'],'prefix' => 'api'], function () {
-    Route::post('register', 'APIController@register');
-    Route::post('login', 'APIController@login');
-
-    Route::group(['middleware' => 'jwt-auth'], function () {
-    	Route::post('get_user_details', 'APIController@get_user_details');
-    });
-});
 
 Route::get('Error', function()
 {

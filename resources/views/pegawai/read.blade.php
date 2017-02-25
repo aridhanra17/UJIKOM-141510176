@@ -38,7 +38,12 @@
 					<div class="form-group">
 						<label for="golongan_id" class="col-sm-2 control-label">Foto Pegawai</label>
 						<div class="col-sm-10">
-							<img src="{{ asset('gambar/'.$pegawai->photo.'') }}" width="100" height="100">
+							@if(empty($pegawai->photo))
+                            <img src="{{asset('gambar/user.png')}}" width="100" height="100">
+                            @endif
+                            @if(!empty($pegawai->photo))
+                            <img src="{{ asset('gambar/'.$pegawai->photo.'') }}" width="100" height="100"> 
+                            @endif
 						</div>
 					</div>
 					
