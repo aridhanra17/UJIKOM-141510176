@@ -19,7 +19,6 @@
                     <a href="index.html" class="logo"><strong>Penggajian</strong> </a>
                     <nav id="nav">
                         <a href="{{ url('/login') }}">Login</a>
-                    <a href="{{ url('/register') }}">Register</a>
                     </nav>
                     <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
                 </div>
